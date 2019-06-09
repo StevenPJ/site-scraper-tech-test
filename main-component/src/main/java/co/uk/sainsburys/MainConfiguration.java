@@ -25,8 +25,8 @@ public class MainConfiguration {
     }
 
     @Bean
-    public TotalStrategy totalStrategy() {
-        return new GrossTotalStrategy();
+    public TotalStrategy totalStrategy(@Value("${vat.rate.STANDARD}") Integer standardRate) {
+        return new GrossTotalStrategy(standardRate);
     }
 
     @Bean

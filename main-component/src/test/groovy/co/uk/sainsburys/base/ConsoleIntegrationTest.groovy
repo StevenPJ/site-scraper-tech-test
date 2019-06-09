@@ -11,7 +11,7 @@ import spock.lang.Specification
 @Ignore
 @SpringBootTest(classes = StartUpApplication.class)
 @TestPropertySource("/application-test.properties")
-class ConsoleIntegrationTest extends Specification {
+class ConsoleIntegrationSlowTest extends Specification {
 
     @Rule
     public OutputCapture outputCapture = new OutputCapture();

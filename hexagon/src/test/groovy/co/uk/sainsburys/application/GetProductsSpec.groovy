@@ -22,7 +22,7 @@ class GetProductsSpec extends Specification {
     def setup() {
         presenter = Mock()
         productRepository = Mock()
-        totalStrategy = new GrossTotalStrategy()
+        totalStrategy = new GrossTotalStrategy(20)
         getProducts = new ProductsService(presenter, productRepository, totalStrategy)
     }
 

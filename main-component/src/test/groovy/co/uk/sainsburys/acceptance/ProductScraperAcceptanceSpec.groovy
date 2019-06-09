@@ -1,12 +1,12 @@
 package co.uk.sainsburys.acceptance
 
-import co.uk.sainsburys.base.ConsoleIntegrationTest
+import co.uk.sainsburys.base.ConsoleIntegrationSlowTest
 import co.uk.sainsburys.base.OperatesOnJson
 import co.uk.sainsburys.base.TestData
 import co.uk.sainsburys.driver.GetProducts
 import org.springframework.beans.factory.annotation.Autowired
 
-class ProductScraperAcceptanceSpec extends ConsoleIntegrationTest
+class ProductScraperAcceptanceSpec extends ConsoleIntegrationSlowTest
     implements OperatesOnJson {
 
     @Autowired

@@ -4,6 +4,7 @@ import co.uk.sainsburys.application.ProductsResult
 import co.uk.sainsburys.application.ProductsResultFactory
 import co.uk.sainsburys.domain.Money
 import co.uk.sainsburys.domain.Product
+import co.uk.sainsburys.domain.VatRate
 import groovy.transform.CompileStatic
 
 @CompileStatic
@@ -16,6 +17,7 @@ class SampleData {
                 .calories(props.calories as Integer)
                 .price(new Money(props.price as Number))
                 .description(props.description as String)
+                .vatRate(props.rate as VatRate)
                 .build();
     }
 
@@ -23,7 +25,8 @@ class SampleData {
             title: "Blackcurrent's 100g",
             calories: 22,
             price: 1.5,
-            description: "by Sainsbury's ltd"
+            description: "by Sainsbury's ltd",
+            rate: VatRate.STANDARD_RATE
     ]
 
     static Map SAMPLE_PRODUCT_JSON_PROPERTIES = [

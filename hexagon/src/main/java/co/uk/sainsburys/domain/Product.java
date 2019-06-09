@@ -10,4 +10,5 @@ public class Product {
     private Integer calories;
     private Money price;
     private String description;
+    private VatRate vatRate;
 }
