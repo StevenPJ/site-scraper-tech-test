@@ -14,6 +14,7 @@ public class ProductsResult {
         private String title;
         private Integer kcal_per_100g;
         private Number unit_price;
+        private String description;
     }
 
     @Value

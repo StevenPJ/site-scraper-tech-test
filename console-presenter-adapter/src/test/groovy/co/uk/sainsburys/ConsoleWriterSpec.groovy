@@ -61,7 +61,7 @@ class ConsoleWriterSpec extends Specification
         when: "a valid result is shown"
             presenter.show(SampleData.makeResult([SampleData.make(calories: 10)]))
             Map result = asJson(consoleCapture.toString()).results.first()
-        then: "should not print a kcal_per_100g field"
+        then: "should print a kcal_per_100g field"
             result.kcal_per_100g
     }
 
@@ -84,12 +84,21 @@ class ConsoleWriterSpec extends Specification
             result.results.first().unit_price == 3.34
     }
 
-
     def "should print error as json with error message"() {
         when:
             presenter.showErrorMessage("There was an error")
         then:
             assertFieldIs(consoleCapture.toString(), "error", "There was an error")
 
+    }
+
+    def "should include title and description"() {
+        when: "a valid result is shown"
+            presenter.show(SampleData.makeResult())
+            Map result = asJson(consoleCapture.toString()).results.first()
+        then: "should include title"
+            result.title
+        and: "should include description"
+            result.description
     }
 }

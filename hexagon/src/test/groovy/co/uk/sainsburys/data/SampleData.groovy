@@ -15,19 +15,22 @@ class SampleData {
                 .title(props.title as String)
                 .calories(props.calories as Integer)
                 .price(new Money(props.price as Number))
+                .description(props.description as String)
                 .build();
     }
 
     static Map SAMPLE_PRODUCT_PROPERTIES = [
             title: "Blackcurrent's 100g",
             calories: 22,
-            price: 1.5
+            price: 1.5,
+            description: "by Sainsbury's ltd"
     ]
 
     static Map SAMPLE_PRODUCT_JSON_PROPERTIES = [
             title: "Blackcurrent's 100g",
             kcal_per_100g: 22,
-            unit_price: 1.5
+            unit_price: 1.5,
+            description: "by Sainsbury's ltd"
     ]
 
     static ProductsResult makeResult(List<Product> products, Number gross, Number vat) {

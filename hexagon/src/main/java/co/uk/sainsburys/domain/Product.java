@@ -9,4 +9,5 @@ public class Product {
     private String title;
     private Integer calories;
     private Money price;
+    private String description;
 }

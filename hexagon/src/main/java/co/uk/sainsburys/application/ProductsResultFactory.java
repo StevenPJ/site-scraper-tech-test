@@ -25,7 +25,8 @@ public class ProductsResultFactory {
         return new ProductsResult.ProductDto(
             product.getTitle(),
             product.getCalories(),
-            price
+            price,
+            product.getDescription()
         );
     }
 
