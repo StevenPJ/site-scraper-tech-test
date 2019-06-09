@@ -8,4 +8,5 @@ import lombok.Getter;
 public class Product {
     private String title;
     private Integer calories;
+    private Money price;
 }

@@ -2,6 +2,7 @@ package co.uk.sainsburys.data
 
 import co.uk.sainsburys.application.ProductsResult
 import co.uk.sainsburys.application.ProductsResultFactory
+import co.uk.sainsburys.domain.Money
 import co.uk.sainsburys.domain.Product
 import groovy.transform.CompileStatic
 
@@ -13,33 +14,40 @@ class SampleData {
         return Product.builder()
                 .title(props.title as String)
                 .calories(props.calories as Integer)
+                .price(new Money(props.price as Number))
                 .build();
     }
 
     static Map SAMPLE_PRODUCT_PROPERTIES = [
             title: "Blackcurrent's 100g",
             calories: 22,
+            price: 1.5
     ]
 
     static Map SAMPLE_PRODUCT_JSON_PROPERTIES = [
             title: "Blackcurrent's 100g",
             kcal_per_100g: 22,
+            unit_price: 1.5
     ]
 
     static ProductsResult makeResult(List<Product> products, Number gross, Number vat) {
-        return ProductsResultFactory.getResult(products, gross, vat)
+        return ProductsResultFactory.getResult(products, money(gross), money(vat))
     }
 
     static ProductsResult makeResult(List<Product> products) {
-        return ProductsResultFactory.getResult(products, 0, 0)
+        return ProductsResultFactory.getResult(products, money(0), money(0))
     }
 
     static ProductsResult makeResult() {
-        return ProductsResultFactory.getResult([make()], 0, 0)
+        return ProductsResultFactory.getResult([make()], money(0), money(0))
     }
 
     static ProductsResult emptyResult() {
-        return ProductsResultFactory.getResult([], 0, 0)
+        return ProductsResultFactory.getResult([], money(0), money(0))
+    }
+
+    static Money money(Number amount) {
+        return new Money(amount)
     }
 
 }

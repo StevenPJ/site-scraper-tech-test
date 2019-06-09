@@ -1,5 +1,6 @@
 package co.uk.sainsburys.application;
 
+import co.uk.sainsburys.domain.Money;
 import co.uk.sainsburys.domain.Product;
 
 import java.util.List;
@@ -9,19 +10,22 @@ public class ProductsResultFactory {
 
     private ProductsResultFactory() {}
 
-    public static ProductsResult getResult(List<Product> products, Number gross, Number vat) {
+    public static ProductsResult getResult(List<Product> products, Money gross, Money vat) {
         List<ProductsResult.ProductDto> productDtos = products
             .stream()
             .map(ProductsResultFactory::getProductDto)
             .collect(Collectors.toList());
-        ProductsResult.ResultTotal total = getTotal(gross, vat);
+
+        ProductsResult.ResultTotal total = getTotal(gross.getAmount(), vat.getAmount());
         return new ProductsResult(productDtos, total);
     }
 
     private static ProductsResult.ProductDto getProductDto(Product product) {
+        Number price = product.getPrice() == null ? 0 : product.getPrice().getAmount();
         return new ProductsResult.ProductDto(
             product.getTitle(),
-            product.getCalories()
+            product.getCalories(),
+            price
         );
     }
 

@@ -26,4 +26,8 @@ trait OperatesOnConsole {
     void assertConsoleWrittenTo() {
         assert consoleCapture.toString().length() > 0
     }
+
+    void assertConsoleNotWrittenTo() {
+        assert consoleCapture.toString().isEmpty()
+    }
 }

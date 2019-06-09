@@ -1,5 +1,6 @@
 package co.uk.sainsburys.application;
 
+import co.uk.sainsburys.domain.Money;
 import co.uk.sainsburys.domain.Product;
 import co.uk.sainsburys.driven.data.ProductRepository;
 import co.uk.sainsburys.driven.presenter.Presenter;
@@ -17,8 +18,8 @@ public class ProductsService implements GetProducts {
     @Override
     public void fromPage(String pageLink) {
         List<Product> products = productRepository.search(pageLink);
-        Number gross = 0;
-        Number vat = 0;
+        Money gross = new Money(0);
+        Money vat = new Money(0);
         ProductsResult result = ProductsResultFactory.getResult(products, gross, vat);
         presenter.show(result);
     }

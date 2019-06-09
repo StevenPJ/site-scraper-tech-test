@@ -65,5 +65,24 @@ class ConsoleWriterSpec extends Specification
             result.kcal_per_100g
     }
 
+    def "should not throw exception when printing null object"() {
+        when:
+            presenter.show(null)
+        then:
+            noExceptionThrown()
+    }
+
+    def "should print money to max 2 decimal places"() {
+        when: "a valid result is shown"
+            presenter.show(SampleData.makeResult([SampleData.make(price: 3.337)], 1.111, 2.222))
+            Map result = asJson(consoleCapture.toString())
+        then: "should round total gross"
+            result.total.gross == 1.11
+        and: "should round total vat"
+            result.total.vat == 2.22
+        and: "should round product unit price"
+            result.results.first().unit_price == 3.34
+    }
+
 
 }
