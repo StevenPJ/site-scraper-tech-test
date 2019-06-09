@@ -1,7 +1,9 @@
 package co.uk.sainsburys.repository.dao
 
+import co.uk.sainsburys.domain.exception.PageLoadException
 import co.uk.sainsburys.repository.ProductDetails
 import co.uk.sainsburys.repository.scraper.Scraper
+import co.uk.sainsburys.repository.scraper.UnableToScrapeException
 import spock.lang.Specification
 
 
@@ -63,5 +65,14 @@ class ProductDaoSpec extends Specification {
             details.first().getDescription() == null
             details.first().getCalories() == null
             details.first().getPrice() == null
+    }
+
+    def "should throw PageLoadException when scraper has issues"() {
+        given:
+            scraper.extractAll(MOCK_GROCERY_LINK, ProductDetailsDao.LINKS, "href") >> {throw new UnableToScrapeException("message", null)}
+        when:
+            dao.extractFrom(MOCK_GROCERY_LINK)
+        then:
+            thrown PageLoadException
     }
 }

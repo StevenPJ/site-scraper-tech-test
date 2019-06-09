@@ -4,6 +4,7 @@ import co.uk.sainsburys.domain.exception.PageLoadException;
 import co.uk.sainsburys.driven.data.Dao;
 import co.uk.sainsburys.repository.ProductDetails;
 import co.uk.sainsburys.repository.scraper.Scraper;
+import co.uk.sainsburys.repository.scraper.UnableToScrapeException;
 import lombok.AllArgsConstructor;
 
 import java.net.MalformedURLException;
@@ -32,16 +33,20 @@ public class ProductDetailsDao implements Dao<List<ProductDetails>> {
      */
     @Override
     public List<ProductDetails> extractFrom(String page) throws PageLoadException {
-        List<String> relativeLinks = scraper.extractAll(page, LINKS, "href");
-        List<ProductDetails> details = new ArrayList<>();
-        for (String link : relativeLinks) {
-            String absoluteLink = convertToAbsoluteLink(page, link);
-            details.add(extractProduct(absoluteLink));
+        try {
+            List<String> relativeLinks = scraper.extractAll(page, LINKS, "href");
+            List<ProductDetails> details = new ArrayList<>();
+            for (String link : relativeLinks) {
+                String absoluteLink = convertToAbsoluteLink(page, link);
+                details.add(extractProduct(absoluteLink));
+            }
+            return details;
+        } catch (UnableToScrapeException e) {
+            throw new PageLoadException(e.getMessage(), page, e);
         }
-        return details;
     }
 
-    private ProductDetails extractProduct(String productPage) {
+    private ProductDetails extractProduct(String productPage)  throws UnableToScrapeException {
         String title = scraper.extract(productPage, TITLE).orElse(null);
         String description = scraper.extract(productPage, DESCRIPTION).orElse(null);
         String calories = scraper.extract(productPage, CALORIES).orElse(null);
