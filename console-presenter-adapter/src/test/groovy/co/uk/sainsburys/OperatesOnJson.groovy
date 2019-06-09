@@ -17,4 +17,8 @@ trait OperatesOnJson {
     void assertFieldExists(String output, String field) {
         assert asJson(output)[field]
     }
+
+    void assertFieldIs(String output, String field, Object expected) {
+        assert asJson(output)[field] == expected
+    }
 }

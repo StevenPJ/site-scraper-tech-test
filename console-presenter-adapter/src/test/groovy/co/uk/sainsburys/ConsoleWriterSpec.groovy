@@ -36,6 +36,13 @@ class ConsoleWriterSpec extends Specification
             assertFieldExists(consoleCapture.toString(), "total")
     }
 
+    def "should include results list"() {
+        when: "a valid result is shown"
+            presenter.show(sampleResult([], 0, 0))
+        then: "should print a results array"
+            assertFieldIs(consoleCapture.toString(), 'results', [])
+    }
+
 
 
     ProductsResult sampleResult(List list, Number gross, Number vat) {
