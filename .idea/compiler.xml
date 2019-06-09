@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="hexagon" />
+        <module name="product-data-adapter" />
         <module name="console-client-driver" />
         <module name="console-presenter-adapter" />
         <module name="main-component" />
@@ -20,6 +21,7 @@
       <module name="console-presenter-adapter" options="-parameters" />
       <module name="hexagon" options="-parameters" />
       <module name="main-component" options="-parameters" />
+      <module name="product-data-adapter" options="-parameters" />
     </option>
   </component>
 </project>
