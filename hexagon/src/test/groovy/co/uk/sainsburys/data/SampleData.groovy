@@ -33,17 +33,20 @@ class SampleData {
             description: "by Sainsbury's ltd"
     ]
 
-    static ProductsResult makeResult(List<Product> products, Number gross, Number vat) {
-        return ProductsResultFactory.getResult(products, money(gross), money(vat))
+    static ProductsResult makeResult(Map<String, Object> props = [:]) {
+        props = SAMPLE_PRODUCTS_RESULT_PROPERTIES + props
+        return ProductsResultFactory.getResult(
+                [props.product as Product],
+                money(props.gross as Number),
+                money(props.vat as Number)
+        )
     }
 
-    static ProductsResult makeResult(List<Product> products) {
-        return ProductsResultFactory.getResult(products, money(0), money(0))
-    }
-
-    static ProductsResult makeResult() {
-        return ProductsResultFactory.getResult([make()], money(0), money(0))
-    }
+    static Map SAMPLE_PRODUCTS_RESULT_PROPERTIES = [
+            product: make(),
+            gross: 5,
+            vat: 0.83
+    ]
 
     static ProductsResult emptyResult() {
         return ProductsResultFactory.getResult([], money(0), money(0))

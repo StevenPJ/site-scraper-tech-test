@@ -23,14 +23,14 @@ class ConsoleWriterSpec extends Specification
 
     def "should format valid results as JSON"() {
         when: "a valid result is shown"
-            presenter.show(SampleData.emptyResult())
+            presenter.show(SampleData.makeResult())
         then: "results should be json"
             assertIsValidJson(consoleCapture.toString())
     }
 
     def "should include total field"() {
         when: "a valid result is shown"
-            presenter.show(SampleData.emptyResult())
+            presenter.show(SampleData.makeResult())
         then: "should print a total field"
             assertFieldExists(consoleCapture.toString(), "total")
     }
@@ -51,7 +51,7 @@ class ConsoleWriterSpec extends Specification
 
     def "should omit kcal_per_100g if null"() {
         when: "a valid result is shown"
-            presenter.show(SampleData.makeResult([SampleData.make(calories: null)]))
+            presenter.show(SampleData.makeResult(product: SampleData.make(calories: null)))
             Map result = asJson(consoleCapture.toString()).results.first()
         then: "should not print a kcal_per_100g field"
             !result.kcal_per_100g
@@ -59,7 +59,7 @@ class ConsoleWriterSpec extends Specification
 
     def "should include kcal_per_100g if present"() {
         when: "a valid result is shown"
-            presenter.show(SampleData.makeResult([SampleData.make(calories: 10)]))
+            presenter.show(SampleData.makeResult(product: SampleData.make(calories: 10)))
             Map result = asJson(consoleCapture.toString()).results.first()
         then: "should print a kcal_per_100g field"
             result.kcal_per_100g
@@ -74,7 +74,7 @@ class ConsoleWriterSpec extends Specification
 
     def "should print money to max 2 decimal places"() {
         when: "a valid result is shown"
-            presenter.show(SampleData.makeResult([SampleData.make(price: 3.337)], 1.111, 2.222))
+            presenter.show(SampleData.makeResult(product: SampleData.make(price: 3.337), gross: 1.111, vat: 2.222))
             Map result = asJson(consoleCapture.toString())
         then: "should round total gross"
             result.total.gross == 1.11
