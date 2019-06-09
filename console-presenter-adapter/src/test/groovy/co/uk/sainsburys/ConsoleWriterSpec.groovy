@@ -7,7 +7,7 @@ import spock.lang.Specification
 
 
 class ConsoleWriterSpec extends Specification
-    implements OperatesOnConsole {
+    implements OperatesOnConsole, OperatesOnJson {
 
     Presenter presenter;
 
@@ -20,6 +20,13 @@ class ConsoleWriterSpec extends Specification
             presenter.show(sampleResult([]))
         then: "should print to console"
             assertConsoleWrittenTo()
+    }
+
+    def "should format valid results as JSON"() {
+        when: "a valid result is shown"
+            presenter.show(sampleResult([]))
+        then: "results should be json"
+            assertIsValidJson(consoleCapture.toString())
     }
 
     ProductsResult sampleResult(List list) {
