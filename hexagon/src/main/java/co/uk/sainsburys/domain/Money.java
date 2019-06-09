@@ -1,5 +1,6 @@
 package co.uk.sainsburys.domain;
 
+import co.uk.sainsburys.domain.exception.InvalidMoneyOperationException;
 import lombok.Value;
 
 import java.math.BigDecimal;
@@ -13,6 +14,12 @@ public class Money {
     private BigDecimal amount;
 
     public Money(Number value) {
+
+
+        if (value.doubleValue() < 0) {
+            throw new InvalidMoneyOperationException("Cannot have negative money");
+        }
+
         BigDecimal strictValue = BigDecimal.valueOf(value.doubleValue());
         this.amount = strictValue.setScale(ROUNDING_SCALE, ROUNDING_MODE);
     }
