@@ -12,6 +12,7 @@ public class ProductsResult {
     @Value
     public static class ProductDto {
         private String title;
+        private Integer kcal_per_100g;
     }
 
     @Value

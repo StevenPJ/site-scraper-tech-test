@@ -12,15 +12,26 @@ class SampleData {
         props = SAMPLE_PRODUCT_PROPERTIES + props
         return Product.builder()
                 .title(props.title as String)
+                .calories(props.calories as Integer)
                 .build();
     }
 
     static Map SAMPLE_PRODUCT_PROPERTIES = [
-            title: "Blackcurrent's 100g"
+            title: "Blackcurrent's 100g",
+            calories: 22,
+    ]
+
+    static Map SAMPLE_PRODUCT_JSON_PROPERTIES = [
+            title: "Blackcurrent's 100g",
+            kcal_per_100g: 22,
     ]
 
     static ProductsResult makeResult(List<Product> products, Number gross, Number vat) {
         return ProductsResultFactory.getResult(products, gross, vat)
+    }
+
+    static ProductsResult makeResult(List<Product> products) {
+        return ProductsResultFactory.getResult(products, 0, 0)
     }
 
     static ProductsResult makeResult() {

@@ -46,7 +46,23 @@ class ConsoleWriterSpec extends Specification
         when: "a valid result is shown"
             presenter.show(SampleData.makeResult())
         then: "should print result as JSON"
-            assertFieldIs(consoleCapture.toString(), 'results', [SampleData.SAMPLE_PRODUCT_PROPERTIES])
+            assertFieldIs(consoleCapture.toString(), 'results', [SampleData.SAMPLE_PRODUCT_JSON_PROPERTIES])
+    }
+
+    def "should omit kcal_per_100g if null"() {
+        when: "a valid result is shown"
+            presenter.show(SampleData.makeResult([SampleData.make(calories: null)]))
+            Map result = asJson(consoleCapture.toString()).results.first()
+        then: "should not print a kcal_per_100g field"
+            !result.kcal_per_100g
+    }
+
+    def "should include kcal_per_100g if present"() {
+        when: "a valid result is shown"
+            presenter.show(SampleData.makeResult([SampleData.make(calories: 10)]))
+            Map result = asJson(consoleCapture.toString()).results.first()
+        then: "should not print a kcal_per_100g field"
+            result.kcal_per_100g
     }
 
 

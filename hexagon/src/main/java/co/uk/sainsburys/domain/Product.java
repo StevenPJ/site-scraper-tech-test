@@ -7,4 +7,5 @@ import lombok.Getter;
 @Builder
 public class Product {
     private String title;
+    private Integer calories;
 }

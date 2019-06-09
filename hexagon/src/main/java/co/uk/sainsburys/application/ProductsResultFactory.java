@@ -20,7 +20,8 @@ public class ProductsResultFactory {
 
     private static ProductsResult.ProductDto getProductDto(Product product) {
         return new ProductsResult.ProductDto(
-            product.getTitle()
+            product.getTitle(),
+            product.getCalories()
         );
     }
 
