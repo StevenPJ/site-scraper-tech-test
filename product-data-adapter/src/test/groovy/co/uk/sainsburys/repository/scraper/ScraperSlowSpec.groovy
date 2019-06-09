@@ -32,13 +32,6 @@ class ScraperSlowSpec extends Specification {
             thrown UnableToScrapeException
     }
 
-    def "should throw UnableToScrapeException if url doesnt exist"() {
-        when:
-            scraper.extract("http://www.notavalidresourceaddress.fail", "h1")
-        then:
-            thrown UnableToScrapeException
-    }
-
     def "should return empty if valid url without products"() {
         when:
             Optional<String> string = scraper.extract("http://www.google.com", "div.wontbethere")
