@@ -6,4 +6,5 @@ import java.util.Optional;
 public interface Scraper {
     List<String> extractAll(String page, String query, String attrName) throws UnableToScrapeException;
     Optional<String> extract(String page, String query) throws UnableToScrapeException;
+    void load(String page);
 }
