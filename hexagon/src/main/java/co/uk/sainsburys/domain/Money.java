@@ -15,7 +15,6 @@ public class Money {
 
     public Money(Number value) {
 
-
         if (value.doubleValue() < 0) {
             throw new InvalidMoneyOperationException("Cannot have negative money");
         }
