@@ -4,8 +4,6 @@ import co.uk.sainsburys.domain.Money;
 import co.uk.sainsburys.domain.Product;
 import co.uk.sainsburys.driven.data.ProductCreator;
 
-import java.math.BigDecimal;
-
 public class ScrapedProductCreator implements ProductCreator {
     @Override
     public Product create(String title, String description, String calories, String price) {
@@ -13,12 +11,17 @@ public class ScrapedProductCreator implements ProductCreator {
             .title(title)
             .description(description)
             .calories(makeCalories(calories))
-            .price(new Money(new BigDecimal(price)))
+            .price(makePrice(price))
             .build();
     }
 
     private static Integer makeCalories(String value) {
         if (value == null) { return null; }
         return Integer.valueOf(value.replaceAll("\\D+",""));
+    }
+
+    private static Money makePrice(String price) {
+        if (price == null) { return new Money(0); }
+        return new Money(Double.valueOf(price.replaceAll("[^0-9?!\\.]","")));
     }
 }

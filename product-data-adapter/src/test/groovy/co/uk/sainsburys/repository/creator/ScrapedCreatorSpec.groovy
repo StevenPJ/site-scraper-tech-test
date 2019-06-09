@@ -16,7 +16,7 @@ class ScrapedCreatorSpec extends Specification {
 
     def "should create product with happy values"() {
         when:
-            Product product = creator.create(
+            def product = creator.create(
                 "title",
                 "description",
                 "22",
@@ -32,7 +32,7 @@ class ScrapedCreatorSpec extends Specification {
     @Unroll
     def "should parse #calories from #calString"() {
         when:
-            Product product = creator.create(
+            def product = creator.create(
                     "title",
                     "description",
                     calString,
@@ -45,6 +45,29 @@ class ScrapedCreatorSpec extends Specification {
             "10c"       | 10
             "c20"       | 20
             null        | null
+    }
+
+    @Unroll
+    def "should parse #price from #moneyString"() {
+        when:
+            def product = creator.create(
+                    "title",
+                    "description",
+                    "22",
+                    moneyString)
+        then:
+            product.getPrice() == SampleData.money(price)
+        where:
+            moneyString  | price
+            "£2.5"       | 2.5
+            "£1"         | 1
+            "4.55"       | 4.55
+            "£2.75/unit" | 2.75
+            "0"          | 0
+            "0.50"       | 0.5
+            "0.5"        | 0.5
+            null         | 0
+
     }
 
     void assertProductContains(Product product, String title, String description, Integer calories, Number amount) {
