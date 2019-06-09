@@ -55,8 +55,10 @@ Example JSON:
 
  `.mvnw clean package`
 
-## Run
- ```
- java -jar main-component/target/main-component-0.1.jar
- ```
 
+## Run
+By default the application will scrape the page provided within the brief. This can be overwritten by supplying a different page link
+as a property.
+ ```
+ java -jar main-component/target/main-component-0.1.jar [--page-url="link"]
+ ```

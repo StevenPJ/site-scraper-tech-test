@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>hexagon</module>
+        <module>console-client-driver</module>
         <module>main-component</module>
     </modules>
     <name>Sainsbury's Site Scraper</name>
