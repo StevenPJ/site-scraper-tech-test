@@ -10,6 +10,7 @@
     <modules>
         <module>hexagon</module>
         <module>console-client-driver</module>
+        <module>console-presenter-adapter</module>
         <module>main-component</module>
     </modules>
     <name>Sainsbury's Site Scraper</name>

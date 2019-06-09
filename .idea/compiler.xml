@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="hexagon" />
         <module name="console-client-driver" />
+        <module name="console-presenter-adapter" />
         <module name="main-component" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="console-client-driver" options="-parameters" />
+      <module name="console-presenter-adapter" options="-parameters" />
       <module name="hexagon" options="-parameters" />
       <module name="main-component" options="-parameters" />
     </option>

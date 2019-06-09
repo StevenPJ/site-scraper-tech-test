@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/console-client-driver" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/console-presenter-adapter" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hexagon" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/main-component" charset="UTF-8" />
   </component>

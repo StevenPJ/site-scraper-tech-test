@@ -14,7 +14,7 @@ public class MainConfiguration {
 
     @Bean
     public Presenter presenter() {
-        throw new UnsupportedOperationException();
+       return new ConsoleWriter();
     }
 
     @Bean
