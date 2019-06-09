@@ -2,6 +2,7 @@ package co.uk.sainsburys.repository.creator
 
 import co.uk.sainsburys.data.SampleData
 import co.uk.sainsburys.domain.Product
+import co.uk.sainsburys.domain.VatRate
 import co.uk.sainsburys.driven.data.ProductCreator
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -11,7 +12,7 @@ class ScrapedCreatorSpec extends Specification {
     ProductCreator creator
 
     def setup() {
-        creator = new ScrapedProductCreator()
+        creator = new ScrapedProductCreator(VatRate.STANDARD_RATE)
     }
 
     def "should create product with happy values"() {
@@ -67,7 +68,17 @@ class ScrapedCreatorSpec extends Specification {
             "0.50"       | 0.5
             "0.5"        | 0.5
             null         | 0
+    }
 
+    def "should apply default rate to all products"() {
+        when:
+            def product = creator.create(
+                "title",
+                "description",
+                "22",
+                "1")
+        then:
+            product.getVatRate() == VatRate.STANDARD_RATE
     }
 
     void assertProductContains(Product product, String title, String description, Integer calories, Number amount) {

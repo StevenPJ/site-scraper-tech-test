@@ -2,6 +2,7 @@ package co.uk.sainsburys;
 
 
 import co.uk.sainsburys.application.ProductsService;
+import co.uk.sainsburys.domain.VatRate;
 import co.uk.sainsburys.driven.data.Dao;
 import co.uk.sainsburys.driven.data.ProductCreator;
 import co.uk.sainsburys.driven.data.ProductRepository;
@@ -28,8 +29,8 @@ public class MainConfiguration {
     }
 
     @Bean
-    public ProductCreator productCreator() {
-        return new ScrapedProductCreator();
+    public ProductCreator productCreator(@Value("${product.default.vat.rate}") VatRate defaultRate) {
+        return new ScrapedProductCreator(defaultRate);
     }
 
     @Bean

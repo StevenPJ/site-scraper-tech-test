@@ -2,9 +2,15 @@ package co.uk.sainsburys.repository.creator;
 
 import co.uk.sainsburys.domain.Money;
 import co.uk.sainsburys.domain.Product;
+import co.uk.sainsburys.domain.VatRate;
 import co.uk.sainsburys.driven.data.ProductCreator;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class ScrapedProductCreator implements ProductCreator {
+
+    private VatRate defaultRate;
+
     @Override
     public Product create(String title, String description, String calories, String price) {
         return Product.builder()
@@ -12,6 +18,7 @@ public class ScrapedProductCreator implements ProductCreator {
             .description(description)
             .calories(makeCalories(calories))
             .price(makePrice(price))
+            .vatRate(defaultRate)
             .build();
     }
 
