@@ -1,6 +1,6 @@
 package co.uk.sainsburys.application
 
-import co.uk.sainsburys.domain.Product
+import co.uk.sainsburys.data.SampleData
 import co.uk.sainsburys.driven.data.ProductRepository
 import co.uk.sainsburys.driven.presenter.Presenter
 import co.uk.sainsburys.driver.GetProducts
@@ -10,7 +10,6 @@ import spock.lang.Specification
 class GetProductsSpec extends Specification {
 
     String link = "link"
-    List<Product> products = sampleProducts()
 
     Presenter presenter
     ProductRepository productRepository
@@ -24,14 +23,11 @@ class GetProductsSpec extends Specification {
 
     def "should show a result with found products"() {
         given:
-            productRepository.search(link) >> products
+            productRepository.search(link) >>  [SampleData.make()]
         when:
             getProducts.fromPage(link);
         then:
-            1 * presenter.show(ProductsResultFactory.getResult(products))
+            1 * presenter.show(SampleData.makeResult())
     }
 
-    List<Product> sampleProducts() {
-        return []
-    }
 }
