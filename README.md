@@ -50,3 +50,13 @@ Example JSON:
    }
  }
  ```
+
+## Build
+
+ `.mvnw clean package`
+
+## Run
+ ```
+ java -jar main-component/target/main-component-0.1.jar
+ ```
+
