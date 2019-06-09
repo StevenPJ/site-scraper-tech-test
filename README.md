@@ -53,7 +53,7 @@ Example JSON:
 
 ## Build
 
- `.mvnw clean package`
+ `./mvnw clean package`
 
 
 ## Run
