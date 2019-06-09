@@ -11,6 +11,8 @@
 
     <artifactId>product-data-adapter</artifactId>
     <version>0.1</version>
+    <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>co.uk.sainsburys</groupId>
@@ -18,7 +20,14 @@
             <version>0.1</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>co.uk.sainsburys</groupId>
+            <artifactId>hexagon</artifactId>
+            <version>0.1</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-    <packaging>jar</packaging>
 
 </project>
