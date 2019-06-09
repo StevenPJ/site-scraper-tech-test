@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 
 public class StaticJsoupScraper implements Scraper {
 
-    private String cachedLink;
-    private Document document;
+    protected String cachedLink;
+    protected Document document;
 
     @Override
     public Optional<String> extract(String page, String query) throws UnableToScrapeException {
@@ -28,12 +28,12 @@ public class StaticJsoupScraper implements Scraper {
     }
 
     @Override
-    public void load(String html) {
+    public void load(String html) throws UnableToScrapeException {
         this.document = Jsoup.parse(html);
         this.cachedLink = html;
     }
 
-    private void checkLoad(String pageLink) {
+    protected void checkLoad(String pageLink) throws UnableToScrapeException {
         if (cachedLink == null || !cachedLink.equals(pageLink)) {
             load(pageLink);
         }

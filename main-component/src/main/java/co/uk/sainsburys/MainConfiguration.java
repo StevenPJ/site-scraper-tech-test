@@ -14,6 +14,7 @@ import co.uk.sainsburys.repository.ProductDetails;
 import co.uk.sainsburys.repository.ScrapedProductRepository;
 import co.uk.sainsburys.repository.creator.ScrapedProductCreator;
 import co.uk.sainsburys.repository.dao.ProductDetailsDao;
+import co.uk.sainsburys.repository.scraper.RemoteJsoupScraper;
 import co.uk.sainsburys.repository.scraper.Scraper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -36,7 +37,7 @@ public class MainConfiguration {
 
     @Bean
     public Scraper scraper() {
-        throw new UnsupportedOperationException();
+        return new RemoteJsoupScraper();
     }
 
     @Bean
