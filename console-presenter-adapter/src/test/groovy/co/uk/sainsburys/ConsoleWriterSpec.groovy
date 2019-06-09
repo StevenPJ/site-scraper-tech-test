@@ -85,4 +85,11 @@ class ConsoleWriterSpec extends Specification
     }
 
 
+    def "should print error as json with error message"() {
+        when:
+            presenter.showErrorMessage("There was an error")
+        then:
+            assertFieldIs(consoleCapture.toString(), "error", "There was an error")
+
+    }
 }
