@@ -17,20 +17,29 @@ class ConsoleWriterSpec extends Specification
 
     def "should print results to the console"() {
         when: "a result is shown"
-            presenter.show(sampleResult([]))
+            presenter.show(sampleResult([], 0, 0))
         then: "should print to console"
             assertConsoleWrittenTo()
     }
 
     def "should format valid results as JSON"() {
         when: "a valid result is shown"
-            presenter.show(sampleResult([]))
+            presenter.show(sampleResult([], 0, 0))
         then: "results should be json"
             assertIsValidJson(consoleCapture.toString())
     }
 
-    ProductsResult sampleResult(List list) {
-        return ProductsResultFactory.getResult(list)
+    def "should include total field"() {
+        when: "a valid result is shown"
+            presenter.show(sampleResult([], 0, 0))
+        then: "should print a total field"
+            assertFieldExists(consoleCapture.toString(), "total")
+    }
+
+
+
+    ProductsResult sampleResult(List list, Number gross, Number vat) {
+        return ProductsResultFactory.getResult(list, gross, vat)
     }
 
 }

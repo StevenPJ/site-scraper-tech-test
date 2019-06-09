@@ -6,6 +6,7 @@ import co.uk.sainsburys.driven.presenter.Presenter;
 import co.uk.sainsburys.driver.GetProducts;
 import lombok.AllArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @AllArgsConstructor
@@ -17,7 +18,9 @@ public class ProductsService implements GetProducts {
     @Override
     public void fromPage(String pageLink) {
         List<Product> products = productRepository.search(pageLink);
-        ProductsResult result = ProductsResultFactory.getResult(products);
+        Number gross = BigDecimal.ZERO;
+        Number vat = BigDecimal.ZERO;
+        ProductsResult result = ProductsResultFactory.getResult(products, gross, vat);
         presenter.show(result);
     }
 }

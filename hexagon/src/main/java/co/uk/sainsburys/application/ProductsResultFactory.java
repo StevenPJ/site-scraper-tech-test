@@ -9,12 +9,13 @@ public class ProductsResultFactory {
 
     private ProductsResultFactory() {}
 
-    public static ProductsResult getResult(List<Product> products) {
+    public static ProductsResult getResult(List<Product> products, Number gross, Number vat) {
         List<ProductsResult.ProductDto> productDtos = products
             .stream()
             .map(ProductsResultFactory::getProductDto)
             .collect(Collectors.toList());
-        return new ProductsResult(productDtos);
+        ProductsResult.ResultTotal total = getTotal(gross, vat);
+        return new ProductsResult(productDtos, total);
     }
 
     private static ProductsResult.ProductDto getProductDto(Product product) {
@@ -22,4 +23,9 @@ public class ProductsResultFactory {
             product.getTitle()
         );
     }
+
+    private static ProductsResult.ResultTotal getTotal(Number gross, Number vat) {
+        return new ProductsResult.ResultTotal(gross, vat);
+    }
+
 }
