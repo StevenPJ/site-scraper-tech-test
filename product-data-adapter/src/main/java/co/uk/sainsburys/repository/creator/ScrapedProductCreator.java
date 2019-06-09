@@ -12,8 +12,13 @@ public class ScrapedProductCreator implements ProductCreator {
         return Product.builder()
             .title(title)
             .description(description)
-            .calories(Integer.valueOf(calories))
+            .calories(makeCalories(calories))
             .price(new Money(new BigDecimal(price)))
             .build();
+    }
+
+    private static Integer makeCalories(String value) {
+        if (value == null) { return null; }
+        return Integer.valueOf(value.replaceAll("\\D+",""));
     }
 }
