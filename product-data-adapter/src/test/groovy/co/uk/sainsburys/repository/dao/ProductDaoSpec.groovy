@@ -36,4 +36,32 @@ class ProductDaoSpec extends Specification {
             details.first().getCalories() == "calories"
             details.first().getPrice() == "price"
     }
+
+    def "should convert relative links to absolute"() {
+        given:
+            scraper.extractAll(MOCK_GROCERY_LINK, ProductDetailsDao.LINKS, "href") >> [MOCK_RELATIVE_PRODUCT_LINK]
+        when:
+            dao.extractFrom(MOCK_GROCERY_LINK)
+        then:
+            1 * scraper.extract(MOCK_ABSOLUTE_PRODUCT_LINK, ProductDetailsDao.TITLE) >> Optional.empty();
+            1 * scraper.extract(MOCK_ABSOLUTE_PRODUCT_LINK, ProductDetailsDao.DESCRIPTION) >> Optional.empty();
+            1 * scraper.extract(MOCK_ABSOLUTE_PRODUCT_LINK, ProductDetailsDao.CALORIES) >> Optional.empty();
+            1 * scraper.extract(MOCK_ABSOLUTE_PRODUCT_LINK, ProductDetailsDao.PRICE) >> Optional.empty();
+    }
+
+    def "should return null when no matching elements found"() {
+        given:
+            scraper.extractAll(MOCK_GROCERY_LINK, ProductDetailsDao.LINKS, "href") >> [MOCK_RELATIVE_PRODUCT_LINK]
+            scraper.extract(MOCK_ABSOLUTE_PRODUCT_LINK, ProductDetailsDao.TITLE) >> Optional.empty()
+            scraper.extract(MOCK_ABSOLUTE_PRODUCT_LINK, ProductDetailsDao.DESCRIPTION) >> Optional.empty()
+            scraper.extract(MOCK_ABSOLUTE_PRODUCT_LINK, ProductDetailsDao.CALORIES) >> Optional.empty()
+            scraper.extract(MOCK_ABSOLUTE_PRODUCT_LINK, ProductDetailsDao.PRICE) >> Optional.empty()
+        when:
+            List<ProductDetails> details = dao.extractFrom(MOCK_GROCERY_LINK)
+        then:
+            details.first().getTitle() == null
+            details.first().getDescription() == null
+            details.first().getCalories() == null
+            details.first().getPrice() == null
+    }
 }

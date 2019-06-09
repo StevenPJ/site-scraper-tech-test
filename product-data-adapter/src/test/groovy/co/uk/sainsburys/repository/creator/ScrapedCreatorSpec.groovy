@@ -81,6 +81,17 @@ class ScrapedCreatorSpec extends Specification {
             product.getVatRate() == VatRate.STANDARD_RATE
     }
 
+    def "should create product with null values"() {
+        when:
+        def product = creator.create(null, null, null, null)
+        then:
+        assertProductContains(product,
+                null,
+                null,
+                null,
+                0)
+    }
+
     void assertProductContains(Product product, String title, String description, Integer calories, Number amount) {
         assert product.getTitle() == title
         assert product.getDescription() == description
