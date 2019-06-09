@@ -14,6 +14,7 @@ import co.uk.sainsburys.repository.ProductDetails;
 import co.uk.sainsburys.repository.ScrapedProductRepository;
 import co.uk.sainsburys.repository.creator.ScrapedProductCreator;
 import co.uk.sainsburys.repository.dao.ProductDetailsDao;
+import co.uk.sainsburys.repository.scraper.Scraper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,8 +35,13 @@ public class MainConfiguration {
     }
 
     @Bean
-    public Dao<List<ProductDetails>> productDetailsDao() {
-        return new ProductDetailsDao();
+    public Scraper scraper() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Bean
+    public Dao<List<ProductDetails>> productDetailsDao(Scraper scraper) {
+        return new ProductDetailsDao(scraper);
     }
 
 

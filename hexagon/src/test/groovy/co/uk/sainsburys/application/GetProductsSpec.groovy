@@ -3,6 +3,7 @@ package co.uk.sainsburys.application
 import co.uk.sainsburys.data.SampleData
 import co.uk.sainsburys.domain.Product
 import co.uk.sainsburys.domain.exception.InvalidMoneyOperationException
+import co.uk.sainsburys.domain.exception.PageLoadException
 import co.uk.sainsburys.driven.data.ProductRepository
 import co.uk.sainsburys.driven.presenter.Presenter
 import co.uk.sainsburys.driven.total.GrossTotalStrategy
@@ -54,6 +55,15 @@ class GetProductsSpec extends Specification {
             getProducts.fromPage(link);
         then:
             1 * presenter.showErrorMessage("message")
+    }
+
+    def "should show error message when PageLoadException"() {
+        given:
+            productRepository.search(link) >> {throw new PageLoadException("reason", "link", null)}
+        when:
+            getProducts.fromPage(link);
+        then:
+            1 * presenter.showErrorMessage("Unable to load page link Reason: reason")
     }
 
 }

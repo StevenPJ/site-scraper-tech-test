@@ -1,6 +1,7 @@
 package co.uk.sainsburys.repository;
 
 import co.uk.sainsburys.domain.Product;
+import co.uk.sainsburys.domain.exception.PageLoadException;
 import co.uk.sainsburys.driven.data.Dao;
 import co.uk.sainsburys.driven.data.ProductCreator;
 import co.uk.sainsburys.driven.data.ProductRepository;
@@ -16,7 +17,7 @@ public class ScrapedProductRepository implements ProductRepository {
     ProductCreator creator;
 
     @Override
-    public List<Product> search(String pageLink) {
+    public List<Product> search(String pageLink) throws PageLoadException  {
         return dao.extractFrom(pageLink).stream()
             .map(p -> creator.create(
                 p.getTitle(),
