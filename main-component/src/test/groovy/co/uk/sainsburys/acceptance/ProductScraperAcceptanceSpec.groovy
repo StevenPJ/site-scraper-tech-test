@@ -25,7 +25,7 @@ class ProductScraperAcceptanceSpec extends ConsoleIntegrationSlowTest
     }
 
     void assertResultsDisplayed() {
-        assert outputCapture.toString() == null
+        assert outputCapture.toString() != null
         assert !outputCapture.toString().isEmpty()
     }
 

@@ -17,8 +17,8 @@ public class ProductDetailsDao implements Dao<List<ProductDetails>> {
 
     static String LINKS = "div#productLister ul li h3 a";
     static String TITLE = "h1";
-    static String DESCRIPTION = "div.mainProductInfo h3 + div";
-    static String CALORIES = "table.nutritionTable tr.tableRow0 td";
+    static String DESCRIPTION = "div.mainProductInfo h3 + div p:not(.statements)";
+    static String CALORIES = "table.nutritionTable tr.tableRow0 td, table.nutritionTable tr:nth-child(2) td";
     static String PRICE = "p.pricePerUnit";
 
     private Scraper scraper;
